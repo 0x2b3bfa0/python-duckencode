@@ -1,0 +1,27 @@
+REM Script made specially for CodeReview users
+REM Only works in Linux machines
+
+DEFAULT_DELAY 500
+
+INCLUDE <SoftwareSerial.h>
+
+DEFINE TEXT "Hello"
+
+LOOP // I only will put a comment on the loop
+
+DELAY 3000
+
+CONTROL ALT T
+DELAY 500
+STRING echo "This is a demo"
+DELAY 250
+ENTER
+
+DELAY 3000
+
+ALT F4
+
+REM ARDUINO Serial.begin(9600);
+REM ARDUINO Serial.println(TEXT);
+
+REM Program end
