@@ -17,23 +17,23 @@ If you installed the board stuff from the manager then it will be under your ske
 
 Open that file and find
 
-private:
-    KeyMap* _keyMap;
-    void sendReport(KeyReport* keys);
-    void setKeyMap(KeyMap* keyMap);
-public:
-    Keyboard_();
-    virtual size_t write(uint8_t);
+    private:
+        KeyMap* _keyMap;
+        void sendReport(KeyReport* keys);
+        void setKeyMap(KeyMap* keyMap);
+    public:
+        Keyboard_();
+        virtual size_t write(uint8_t);
 
 Then change that to
 
-private:
-KeyMap* _keyMap;
-void setKeyMap(KeyMap* keyMap);
-public:
-void sendReport(KeyReport* keys);
-Keyboard_();
-virtual size_t write(uint8_t);
+    private:
+        KeyMap* _keyMap;
+        void setKeyMap(KeyMap* keyMap);
+    public:
+        void sendReport(KeyReport* keys);
+        Keyboard_();
+        virtual size_t write(uint8_t);
 
 https://ctrlaltnarwhal.wordpress.com/2012/10/31/installing-usb-rubber-ducky-on-3rd-party-devices/
  /usr/share/arduino/hardware/arduino/cores/arduino/HID.cpp
