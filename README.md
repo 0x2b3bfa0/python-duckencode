@@ -55,8 +55,6 @@ where `{ARDUINO}` represents the directory into which the Arduino IDE and suppor
 
 
 https://ctrlaltnarwhal.wordpress.com/2012/10/31/installing-usb-rubber-ducky-on-3rd-party-devices/
- /usr/share/arduino/hardware/arduino/cores/arduino/HID.cpp
- http://codereview.stackexchange.com/questions/108174/duckyscript-precompiler-for-arduino-leonardo
- http://arduino.stackexchange.com/questions/17057/keyboard-print-skips-keys
+http://codereview.stackexchange.com/questions/108174/duckyscript-precompiler-for-arduino-leonardo http://arduino.stackexchange.com/questions/17057/keyboard-print-skips-keys
  
 <a name="footnote_1">1</a>: `{ARDUINO}` represents the directory into which the Arduino IDE and supporting files have been installed. This may be `/usr/local/arduino` or `/usr/share/arduino` or one of many other possible choices depending on your operating system.
