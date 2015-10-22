@@ -10,12 +10,19 @@ Simply download/clone this repository and run `./compiler.py` or `python3 compil
 
 ---
 
-You may need to change a file on the arduino folder
+You may need to edit the `USBAPI.h` file to make public the `sendReport()`function. `USBAPI.h` shoudld be here:
 
-This may be /usr/share/arduino/hardware/arduino/cores/arduino/USBAPI.h or similar
-If you installed the board stuff from the manager then it will be under your sketches directory as hardware/arduino/cores/arduino/USBAPI.h
+    {ARDUINO}/hardware/arduino/cores/arduino/USBAPI.h
 
-Open that file and find
+where `{ARDUINO}` represents the directory into which the Arduino IDE and supporting files have been installed. This may be `/usr/local/arduino` or `/usr/share/arduino` or one of many other possible choices depending on your operating system.
+    
+    
+If you've installed the board stuff from the boards manager, it will be under your sketches directory:
+
+    {SKETCHES}/hardware/arduino/cores/arduino/USBAPI.h
+    
+
+Open that file with your favorite text editor and find:
 
     private:
         KeyMap* _keyMap;
@@ -25,7 +32,7 @@ Open that file and find
         Keyboard_();
         virtual size_t write(uint8_t);
 
-Then change that to
+Then change that to:
 
     private:
         KeyMap* _keyMap;
