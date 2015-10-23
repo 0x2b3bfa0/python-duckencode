@@ -26,8 +26,8 @@ loop = ""
 
 def info(type, msg, **kwargs):
     lineno = fileinput.lineno()
-    path = os.path.basename(input_file)
     exit = kwargs.get('exit', None)
+    path = os.path.basename(input_file)
     types = ['error', 'warning', 'info', 'screw up risk']
     message = '{}:{}: {}: {}'.format(path, lineno, types[type], msg)
     print(message)
@@ -39,13 +39,13 @@ def info(type, msg, **kwargs):
 def getkey(keys):
     global commands
     keys = keys.split()
-    normalkey = list()
+    normal_keys = []
     modifiers = 0
+
     for key in keys:
-        if not key.isupper():
-            key = key.upper()
-            if len(key) is not 1:
-                info(1, 'you should type all the special keys in uppercase')
+        if not key.isupper() and len(key) is not 1:
+            info(1, 'you should type all the special keys in uppercase')
+        key = key.upper()
 
         try:
             key = [keycodes.get(code) for code in keycodes if key in code][0]
@@ -55,14 +55,14 @@ def getkey(keys):
         if key[1]:
             modifiers |= key[0]
         else:
-            normalkey.append(key[0])
+            normal_keys.append(key[0])
 
-    if len(normalkey) > 6:
-        info(0, 'you can\'t press more than 6 keys at the same time', exit=126)
+    if len(normalkeys) > 6:
+        info(0, 'maximum number of non-modifier keys per line is 6', exit=126)
 
     arguments = [0] * 7
     arguments[6] = modifiers
-    for number, argument in enumerate(normalkey):
+    for number, argument in enumerate(normal_keys):
         arguments[number] = argument
     arguments = [format(byte, '#04x') for byte in arguments]
     commands += 'sendKey({},{},{},{},{},{},{});'.format(*arguments)
