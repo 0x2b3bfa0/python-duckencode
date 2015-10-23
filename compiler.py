@@ -66,7 +66,7 @@ def getkey(keys):
     arguments.append(modifiers)
 
     arguments = [format(byte, '#04x') for byte in arguments]
-    
+
     commands += 'sendKey({},{},{},{},{},{},{});'.format(*arguments)
     commands += '\n'
 
@@ -86,7 +86,10 @@ else:
     input_file = sys.argv[1]
 
 for line in fileinput.input([input_file]):
-    base = list(map(str.strip, line.split(maxsplit=1)))
+    base = line.split(maxsplit=1)
+    base = map(str.strip, base)
+    base = list(base)
+
     if len(base) is 2:
         command, options = base
     elif len(base) is 1:
@@ -96,8 +99,8 @@ for line in fileinput.input([input_file]):
         continue
 
     if not command.isupper() and command not in ('#', '//', ';', '@', '%'):
-        command = command.upper()
         info(1, 'commands should be typed in uppercase')
+        command = command.upper()
 
     if command in ('REM', 'COMMENT', '#', '//', ';'):
         commands += '// {}'.format(options)
@@ -158,16 +161,13 @@ for line in fileinput.input([input_file]):
         if not options.isdigit():
             info(0, '{} only accepts integers'.format(command), exit=11)
         last_command = commands.splitlines()[-1]
-        commands += 'int i=0;'
-        commands += '\n'
-        commands += 'for(i; i<={}; i++) {{'.format(options)
-        commands += '\n'
-        commands += '  {}'.format(last_command)
-        commands += '\n'
-        commands += '  delay({});'.format(delay)
-        commands += '\n'
-        commands += '}'
-        commands += '\n'
+        commands += textwrap.dedent("""
+                       int i=0;
+                       for(i; i<={}; i++) {{
+                         {}
+                         delay({});
+                       }}
+                    """).format(options, last_command, delay)
         needs_delay = False
         cmdtype = 3
 
