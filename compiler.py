@@ -64,7 +64,9 @@ def getkey(keys):
     for index in range(0,6):
         arguments.append(normal_keys.get(index, 0))
     arguments.append(modifiers)
+
     arguments = [format(byte, '#04x') for byte in arguments]
+    
     commands += 'sendKey({},{},{},{},{},{},{});'.format(*arguments)
     commands += '\n'
 
