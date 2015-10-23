@@ -43,8 +43,15 @@ code = textwrap.dedent("""
     void loop() {{
     {loop}
     }}
-""")
+""").strip()
 
+# Here is the base code for the REPEAT command.
+repeat = textwrap.dedent("""
+    for(int i=0; i<{}; i++) {{
+     {}
+     delay({});
+    }}
+""").strip()
 
 # Dictionary with the keys and their hexadecimal values.
 # The structure follows these rules:

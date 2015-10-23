@@ -13,6 +13,7 @@ import sys
 import fileinput
 import textwrap
 from data import keycodes
+from data import repeat
 from data import code
 
 
@@ -39,9 +40,9 @@ def info(type, msg, **kwargs):
 def getkey(keys):
     global commands
     keys = keys.split()
+    modifier_keys = 0
     normal_keys = []
     arguments = []
-    modifiers = 0
 
     for key in keys:
         if not key.isupper() and len(key) is not 1:
@@ -54,7 +55,7 @@ def getkey(keys):
             info(0, 'unrecognized key: {}'.format(key), exit=127)
 
         if key[1]:
-            modifiers |= key[0]
+            modifier_keys |= key[0]
         else:
             normal_keys.append(key[0])
 
@@ -63,7 +64,7 @@ def getkey(keys):
 
     for index in range(0,6):
         arguments.append(normal_keys.get(index, 0))
-    arguments.append(modifiers)
+    arguments.append(modifier_keys)
 
     arguments = [format(byte, '#04x') for byte in arguments]
 
@@ -161,13 +162,7 @@ for line in fileinput.input([input_file]):
         if not options.isdigit():
             info(0, '{} only accepts integers'.format(command), exit=11)
         last_command = commands.splitlines()[-1]
-        commands += textwrap.dedent("""
-                       int i=0;
-                       for(i; i<={}; i++) {{
-                         {}
-                         delay({});
-                       }}
-                    """).format(options, last_command, delay)
+        commands += repeat.format(options, last_command, delay)
         needs_delay = False
         cmdtype = 3
 
