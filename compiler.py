@@ -40,6 +40,7 @@ def getkey(keys):
     global commands
     keys = keys.split()
     normal_keys = []
+    arguments = []
     modifiers = 0
 
     for key in keys:
@@ -57,13 +58,12 @@ def getkey(keys):
         else:
             normal_keys.append(key[0])
 
-    if len(normalkeys) > 6:
+    if len(normal_keys) > 6:
         info(0, 'maximum number of non-modifier keys per line is 6', exit=126)
 
-    arguments = [0] * 7
-    arguments[6] = modifiers
-    for number, argument in enumerate(normal_keys):
-        arguments[number] = argument
+    for index in range(0,6):
+        arguments.append(normal_keys.get(index, 0))
+    arguments.append(modifiers)
     arguments = [format(byte, '#04x') for byte in arguments]
     commands += 'sendKey({},{},{},{},{},{},{});'.format(*arguments)
     commands += '\n'
@@ -191,6 +191,7 @@ code = code.format(includes=includes,
                    defines=defines,
                    setup=commands,
                    loop=loop)
+code = code.strip()
 
 with open(output_file, 'w') as output:
     output.write(code)
