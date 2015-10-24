@@ -3,9 +3,9 @@ REM Only works in Linux machines
 
 DEFAULT_DELAY 500
 
-INCLUDE <SoftwareSerial.h>
+REM INCLUDE <SoftwareSerial.h>
 
-DEFINE TEXT "Hello"
+REM DEFINE TEXT "Hello"
 
 LOOP // I only will put a comment on the loop
 
