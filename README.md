@@ -1,10 +1,10 @@
-Description:
+Description
+-----------
+
+Simple DuckyScript to Arduino translator for AVR chips with USB support.
+
+Installation
 ------------
-
-This program converts Duckyscript code into Arduino code. This arduino code will only work on AVR chips with USB support. I was inspired by [this project][1]
-
-Installation:
--------------
 
 1. Clone this repository and `cd` into it:
 
