@@ -8,7 +8,7 @@ Installation:
 
 1. Clone this repository and `cd` into it:
 
-        git clone https://github.com/crushedice2000/python-duckencode.git
+        git clone https://github.com/0x2b3bfa0/python-duckencode.git
         cd python-duckencode
 
 2. Make public the `sendReport()` function:
